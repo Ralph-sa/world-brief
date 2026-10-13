@@ -373,8 +373,7 @@
     .lead h1 { font-size:1.45rem; }
   }
 
-
-  /* Sticky/fixed title bar — full-bleed, sits above content */
+  /* Fixed title bar — identical on today / archive list / archive issue */
   .topbar {
     position: fixed; top: 0; left: 0; right: 0; z-index: 50;
     margin: 0; padding: 10px 0 12px;
@@ -393,29 +392,31 @@
     .topbar .day-nav,
     .topbar .masthead { max-width: var(--max, 1100px); padding-left: 40px; padding-right: 40px; }
   }
-  .topbar .day-nav { margin-bottom: 10px; }
-  .topbar .masthead { margin-bottom: 0; }
-  .sheet { padding-top: 168px; }
-  @media (min-width: 700px) { .sheet { padding-top: 188px; } }
+  .topbar .day-nav { margin: 0 0 10px; }
+  .topbar .masthead { margin: 0; }
+  /* Content clears the measured bar (--topbar-h set by theme-retro.js) */
+  .sheet {
+    padding-top: calc(var(--topbar-h, 280px) + 16px) !important;
+  }
+  .section, .lead, .page-title, [id] {
+    scroll-margin-top: calc(var(--topbar-h, 280px) + 16px);
+  }
   @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
     .topbar { background: rgba(23, 18, 15, 0.98); }
   }
-
 
 </style>
 </head>
 <body>
 <canvas id="xmb" aria-hidden="true"></canvas>
   <main class="sheet">
-    <div class="topbar">
-<nav class="day-nav" aria-label="日期">
+        <div class="topbar">
+    <nav class="day-nav" aria-label="日期">
       <a class="active" href="index.html">今日</a>
       <a href="archive/index.html">往日</a>
     </nav>
-
     <header class="masthead">
       <div class="brand"><a href="index.html">世界怪兽日报</a></div>
-      
       <div class="meta">
         <span>星期二</span>
         <span>2026年10月13日</span>
@@ -650,6 +651,16 @@
     <footer class="footer">世界怪兽日报 · 2026.10.13</footer>
   </main>
 <script>(function(){
+  /* Measure fixed topbar and keep content clear of it */
+  function syncTopbar(){
+    var t=document.querySelector('.topbar'); if(!t) return;
+    var h=Math.ceil(t.getBoundingClientRect().height);
+    document.documentElement.style.setProperty('--topbar-h', h+'px');
+  }
+  syncTopbar();
+  addEventListener('resize', syncTopbar);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(syncTopbar);
+
   var c=document.getElementById('xmb'); if(!c) return; var x=c.getContext('2d');
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   var w,h,dpr=Math.min(window.devicePixelRatio||1,1.25),t=Math.random()*400,last=0;
