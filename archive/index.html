@@ -372,10 +372,27 @@
     .masthead .brand { font-size:1.55rem; }
     .lead h1 { font-size:1.45rem; }
   }
+
+  /* Sticky title bar: day-nav + masthead stay put while scrolling */
+  .topbar {
+    position: sticky; top: 0; z-index: 40;
+    margin: 0 0 18px;
+    padding: 10px 0 0;
+    background: rgba(23, 18, 15, 0.92);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px rgba(0,0,0,.35);
+  }
+  .topbar .day-nav { margin-bottom: 10px; }
+  .topbar .masthead { margin-bottom: 0; }
+  @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+    .topbar { background: rgba(23, 18, 15, 0.97); }
+  }
 </style>
 </head>
 <body>
+<canvas id="xmb" aria-hidden="true"></canvas>
   <main class="sheet">
+    <div class="topbar">
     <nav class="day-nav" aria-label="日期">
       <a href="../index.html">今日</a>
       <a class="active" href="index.html">往日</a>
@@ -384,11 +401,39 @@
       <div class="brand"><a href="../index.html">世界怪兽日报</a></div>
       <div class="meta"><span>往期简报</span><span>共 1 期</span></div>
     </header>
+    </div>
     <h1 class="page-title">往日</h1>
     <ul class="archive-list">
       <li><a href="2026-10-13.html"><span class="date">2026年10月13日</span><span class="title">清华团队研制核光钟并实现稳定运行</span> <span class="tag">今日</span></a></li>
     </ul>
     <footer class="footer">世界怪兽日报</footer>
   </main>
+<script>(function(){
+  var c=document.getElementById('xmb'); if(!c) return; var x=c.getContext('2d');
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var w,h,dpr=Math.min(window.devicePixelRatio||1,1.25),t=Math.random()*400,last=0;
+  function size(){w=c.width=Math.round(innerWidth*dpr);h=c.height=Math.round(innerHeight*dpr);if(reduce)draw();}
+  function draw(){
+    var hue=22+Math.sin(t*0.04)*10, g=x.createLinearGradient(0,0,w,h);
+    g.addColorStop(0,'hsl('+hue+',32%,10%)'); g.addColorStop(.55,'hsl('+(hue+8)+',28%,7%)'); g.addColorStop(1,'hsl('+(hue+18)+',24%,4%)');
+    x.globalCompositeOperation='source-over'; x.fillStyle=g; x.fillRect(0,0,w,h);
+    x.globalCompositeOperation='lighter';
+    for(var k=0;k<4;k++){
+      x.beginPath();
+      var amp=h*(0.045+0.022*k), base=h*(0.55+0.04*k), ph=t*(0.55+k*0.18)+k*1.8;
+      for(var i=0;i<=40;i++){
+        var px=i/40*w, py=base+Math.sin(px/w*Math.PI*2*(0.7+k*0.12)+ph)*amp+Math.sin(px/w*6.5+ph*1.25)*amp*0.22;
+        i?x.lineTo(px,py):x.moveTo(px,py);
+      }
+      x.lineWidth=(k%2?1.1:28)*dpr;
+      x.strokeStyle='hsla('+(hue+8+k*5)+',42%,68%,'+(k%2?0.11:0.03)+')';
+      x.stroke();
+    }
+  }
+  size(); addEventListener('resize',size);
+  if(reduce) return;
+  (function loop(now){ requestAnimationFrame(loop); if(document.hidden||now-last<55) return; last=now; t+=0.007; draw(); })(0);
+})();
+</script>
 </body>
 </html>

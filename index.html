@@ -372,12 +372,28 @@
     .masthead .brand { font-size:1.55rem; }
     .lead h1 { font-size:1.45rem; }
   }
+
+  /* Sticky title bar: day-nav + masthead stay put while scrolling */
+  .topbar {
+    position: sticky; top: 0; z-index: 40;
+    margin: 0 0 18px;
+    padding: 10px 0 0;
+    background: rgba(23, 18, 15, 0.92);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px rgba(0,0,0,.35);
+  }
+  .topbar .day-nav { margin-bottom: 10px; }
+  .topbar .masthead { margin-bottom: 0; }
+  @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+    .topbar { background: rgba(23, 18, 15, 0.97); }
+  }
 </style>
 </head>
 <body>
 <canvas id="xmb" aria-hidden="true"></canvas>
   <main class="sheet">
-    <nav class="day-nav" aria-label="日期">
+    <div class="topbar">
+<nav class="day-nav" aria-label="日期">
       <a class="active" href="index.html">今日</a>
       <a href="archive/index.html">往日</a>
     </nav>
@@ -393,6 +409,7 @@
         <a href="#tech">科技</a><a href="#economy">经济</a><a href="#politics">政治</a><a href="#ai">AI</a><a href="#games">游戏</a><a href="#gamedev">游戏开发</a><a href="#film">电影</a><a href="#china">中国</a>
       </nav>
     </header>
+    </div>
 
     <!-- LEAD -->
     <section class="lead">
