@@ -225,6 +225,37 @@
   @media (min-width: 480px) {
     .sheet { margin: 16px auto; border-radius: 2px; }
   }
+  /* ===== RESPONSIVE OVERRIDES (phone + desktop) ===== */
+  html, body { max-width: 100%; overflow-x: hidden; }
+  img, figure, video { max-width: 100%; }
+  img { height: auto; display: block; }
+  .sheet { width: 100%; }
+  .section > *, .pair > *, .row > *, .lead > * { min-width: 0; }
+  .row img { width: 100%; height: auto; max-width: 112px; }
+  .story, .row, .pair article { overflow-wrap: anywhere; }
+  @media (max-width: 699px) {
+    .sheet { max-width: 100%; margin: 0; padding: 18px 16px 40px; }
+  }
+  @media (min-width: 700px) {
+    :root { --max: 1100px; }
+    .sheet { max-width: var(--max); margin: 24px auto; padding: 32px 40px 56px; }
+    .masthead .brand { font-size: 2.6rem; }
+    .lead { display: grid; grid-template-columns: 3fr 2fr; gap: 0 28px; align-items: start; }
+    .lead figure { grid-column: 1; grid-row: 1 / span 4; margin: 0; }
+    .lead .kicker, .lead h1, .lead .dek, .lead .byline { grid-column: 2; }
+    .lead h1 { font-size: 2.1rem; }
+    .section { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; align-items: start; }
+    .section > .section-head { grid-column: 1 / -1; }
+    .pair { display: contents; }
+    .pair article { margin-bottom: 18px; padding-bottom: 16px; border-bottom: 1px solid var(--rule); }
+    .pair article img { aspect-ratio: 16 / 9; }
+    .pair h2 { font-size: 1.05rem; }
+    article.story:last-child { border-bottom: 1px solid var(--rule); }
+    .row { margin-bottom: 18px; }
+  }
+  @media (min-width: 1024px) {
+    .section { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
 </style>
 </head>
 <body>
