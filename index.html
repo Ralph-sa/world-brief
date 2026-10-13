@@ -228,7 +228,7 @@
     .sheet { margin: 16px auto; border-radius: 2px; }
   }
   /* ===== RESPONSIVE OVERRIDES (phone + desktop) ===== */
-  html, body { max-width: 100%; overflow-x: hidden; }
+  html, body { max-width: 100%; } /* overflow-x removed: breaks position:sticky/fixed ancestors */
   img, figure, video { max-width: 100%; }
   img { height: auto; display: block; }
   .sheet { width: 100%; }
@@ -373,20 +373,35 @@
     .lead h1 { font-size:1.45rem; }
   }
 
-  /* Sticky title bar: day-nav + masthead stay put while scrolling */
+
+  /* Sticky/fixed title bar — full-bleed, sits above content */
   .topbar {
-    position: sticky; top: 0; z-index: 40;
-    margin: 0 0 18px;
-    padding: 10px 0 0;
-    background: rgba(23, 18, 15, 0.92);
-    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
-    box-shadow: 0 8px 24px rgba(0,0,0,.35);
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    margin: 0; padding: 10px 0 12px;
+    background: rgba(23, 18, 15, 0.94);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    box-shadow: 0 10px 28px rgba(0,0,0,.45);
+  }
+  .topbar .day-nav,
+  .topbar .masthead {
+    max-width: var(--max, 420px);
+    margin-left: auto; margin-right: auto;
+    padding-left: 18px; padding-right: 18px;
+    box-sizing: border-box;
+  }
+  @media (min-width: 700px) {
+    .topbar .day-nav,
+    .topbar .masthead { max-width: var(--max, 1100px); padding-left: 40px; padding-right: 40px; }
   }
   .topbar .day-nav { margin-bottom: 10px; }
   .topbar .masthead { margin-bottom: 0; }
+  .sheet { padding-top: 168px; }
+  @media (min-width: 700px) { .sheet { padding-top: 188px; } }
   @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
-    .topbar { background: rgba(23, 18, 15, 0.97); }
+    .topbar { background: rgba(23, 18, 15, 0.98); }
   }
+
+
 </style>
 </head>
 <body>
