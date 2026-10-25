@@ -233,7 +233,7 @@
     .sheet { margin: 16px auto; border-radius: 2px; }
   }
   /* ===== RESPONSIVE OVERRIDES (phone + desktop) ===== */
-  html, body { max-width: 100%; } /* overflow-x removed: breaks position:sticky/fixed ancestors */
+  html, body { max-width: 100%; }
   img, figure, video { max-width: 100%; }
   img { height: auto; display: block; }
   .sheet { width: 100%; }
@@ -263,27 +263,6 @@
   @media (min-width: 1024px) {
     .section { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
-
-  .page-brand, .lead h1, .story h2, .row h2, .pair h2 {
-    font-family: "Times New Roman", Times, "Songti SC", "Noto Serif SC", serif;
-  }
-  .day-switch { display:flex; justify-content:center; gap:18px; margin:0 0 10px; font-size:.72rem; letter-spacing:.12em; }
-  .day-switch a { color:var(--muted); text-decoration:none; padding-bottom:2px; border-bottom:1px solid transparent; }
-  .day-switch a.active { color:var(--ink); font-weight:700; border-bottom-color:var(--ink); }
-  .day-switch a:hover { color:var(--ink); }
-  .page-brand { text-align:center; font-size:2rem; font-weight:700; letter-spacing:.1em; line-height:1.15; margin:0; }
-  .page-brand a { color:inherit; text-decoration:none; }
-  .page-meta { display:flex; justify-content:space-between; align-items:center; margin:12px 0 4px; padding:8px 0; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); font-size:.68rem; letter-spacing:.06em; color:var(--muted); text-transform:uppercase; }
-  .toc { display:flex; flex-wrap:wrap; justify-content:center; gap:6px 14px; margin:10px 0 20px; font-size:.72rem; letter-spacing:.08em; }
-  .toc a { color:var(--muted); text-decoration:none; }
-  .toc a:hover { color:var(--ink); }
-  .story p, .lead .dek, .row p, .pair p { line-height:1.7; font-size:17px; }
-  .row p { font-size:0.88rem; }
-  @media (min-width: 700px) {
-    .page-brand { font-size:2.8rem; }
-  }
-
-
 
   /* ===== THEME: NYT paper + subtle PS4 waves (世界怪兽日报) ===== */
   :root { --ink:#121212; --muted:#5c5c5c; --rule:#c8c4ba; --paper:#f7f5f0; --paper-deep:#efece4; }
@@ -335,11 +314,12 @@
     <h1 class="page-brand"><a href="../index.html">世界怪兽日报</a></h1>
     <div class="page-meta">
       <span>往期简报</span>
-      <span>共 12 期</span>
+      <span>共 13 期</span>
     </div>
     <h2 class="page-title">往日</h2>
     <ul class="archive-list">
-      <li><a href="2026-10-24.html"><span class="date">2026年10月24日</span><span class="title">AI 基建融资承压，布伦特油价升至近六月高位</span> <span class="tag">今日</span></a></li>
+      <li><a href="2026-10-25.html"><span class="date">2026年10月25日</span><span class="title">八国外长呼吁重开霍尔木兹，布伦特油价维持高位</span> <span class="tag">今日</span></a></li>
+      <li><a href="2026-10-24.html"><span class="date">2026年10月24日</span><span class="title">AI 基建融资承压，布伦特油价升至近六月高位</span></a></li>
       <li><a href="2026-10-23.html"><span class="date">2026年10月23日</span><span class="title">AI 股重挫拖累全球股市，油价因中东紧张升至五月来最高</span></a></li>
       <li><a href="2026-10-22.html"><span class="date">2026年10月22日</span><span class="title">Meta 三季度营收增 26%，同日被判向新墨西哥州支付 250 亿美元</span></a></li>
       <li><a href="2026-10-21.html"><span class="date">2026年10月21日</span><span class="title">SpaceX 三季度营收增长 161%，上市后首份季报实现盈利</span></a></li>
